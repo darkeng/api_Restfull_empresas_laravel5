@@ -1,27 +1,25 @@
-## Laravel PHP Framework
+## Ejemplo: Api Restfull con Laravel PHP Framework
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+Este ejemplo se crean dos tablas en una base de datos mySql "empresas y clientes" de las cuales una empresa puede tener varios clientes, pero un cliente solo puede tener una empresa.
+Para la autenticacion de clientes se utliza oauth2-laravel-server.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
-
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
-
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+## Salida del comando "php artisan route:list"
++--------+----------+--------------------------------------------------+------------------------------------+----------------------------------------------------------------+------------+
+| Domain | Method   | URI                                              | Name                               | Action                                                         | Middleware |
++--------+----------+--------------------------------------------------+------------------------------------+----------------------------------------------------------------+------------+
+|        | GET|HEAD | api/v1.0/empresas                                | api.v1.0.empresas.index            | app_entregas\Http\Controllers\EmpresaController@index          |            |
+|        | POST     | api/v1.0/empresas                                | api.v1.0.empresas.store            | app_entregas\Http\Controllers\EmpresaController@store          | oauth2     |
+|        | GET|HEAD | api/v1.0/empresas/{empresas}                     | api.v1.0.empresas.show             | app_entregas\Http\Controllers\EmpresaController@show           |            |
+|        | PUT      | api/v1.0/empresas/{empresas}                     | api.v1.0.empresas.update           | app_entregas\Http\Controllers\EmpresaController@update         | oauth2     |
+|        | PATCH    | api/v1.0/empresas/{empresas}                     |                                    | app_entregas\Http\Controllers\EmpresaController@update         | oauth2     |
+|        | DELETE   | api/v1.0/empresas/{empresas}                     | api.v1.0.empresas.destroy          | app_entregas\Http\Controllers\EmpresaController@destroy        | oauth2     |
+|        | GET|HEAD | api/v1.0/clientes                                | api.v1.0.clientes.index            | app_entregas\Http\Controllers\ClienteController@index          |            |
+|        | GET|HEAD | api/v1.0/clientes/{clientes}                     | api.v1.0.clientes.show             | app_entregas\Http\Controllers\ClienteController@show           |            |
+|        | GET|HEAD | api/v1.0/empresas/{empresas}/clientes            | api.v1.0.empresas.clientes.index   | app_entregas\Http\Controllers\EmpresaClienteController@index   |            |
+|        | POST     | api/v1.0/empresas/{empresas}/clientes            | api.v1.0.empresas.clientes.store   | app_entregas\Http\Controllers\EmpresaClienteController@store   | oauth2     |
+|        | PUT      | api/v1.0/empresas/{empresas}/clientes/{clientes} | api.v1.0.empresas.clientes.update  | app_entregas\Http\Controllers\EmpresaClienteController@update  | oauth2     |
+|        | PATCH    | api/v1.0/empresas/{empresas}/clientes/{clientes} |                                    | app_entregas\Http\Controllers\EmpresaClienteController@update  | oauth2     |
+|        | DELETE   | api/v1.0/empresas/{empresas}/clientes/{clientes} | api.v1.0.empresas.clientes.destroy | app_entregas\Http\Controllers\EmpresaClienteController@destroy | oauth2     |
+|        | POST     | oauth2/access_token                              |                                    | Closure                                                        |            |
+|        | GET|HEAD | /                                                |                                    | Closure                                                        |            |
++--------+----------+--------------------------------------------------+------------------------------------+----------------------------------------------------------------+------------+
